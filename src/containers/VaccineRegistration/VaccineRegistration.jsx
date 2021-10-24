@@ -9,7 +9,6 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
-import DateTimePicker from "@mui/lab/DateTimePicker";
 import DatePicker from "@mui/lab/DatePicker";
 import React, { useState } from "react";
 
