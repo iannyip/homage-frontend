@@ -14,7 +14,20 @@ import {
 import { Link } from "react-router-dom";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const BACKEND_URL =
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
+const getBookingList = () => {
+  axios
+    .get(BACKEND_URL + "/bookings")
+    .then((result) => {
+      console.log("retrieved!!");
+      console.log(result.data);
+    })
+    .catch((error) => console.log(error));
+};
 
 function getBooking() {
   return [
@@ -43,6 +56,19 @@ function getBooking() {
 }
 
 export default function VaccineRegistrationListing() {
+  const [allBookings, setAllBookings] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(BACKEND_URL + "/bookings")
+      .then((result) => {
+        console.log("retrieved!!");
+        console.log(result.data);
+        setAllBookings(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -62,18 +88,16 @@ export default function VaccineRegistrationListing() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {getBooking().map((row) => (
+                {allBookings.map((row) => (
                   <TableRow
                     key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {row.person.fullName}
                     </TableCell>
-                    <TableCell align="left">{row.centerName}</TableCell>
-                    <TableCell align="left">
-                      {row.startTime.toString()}
-                    </TableCell>
+                    <TableCell align="left">{row.centre.name}</TableCell>
+                    <TableCell align="left">{row.time.toString()}</TableCell>
                     <TableCell align="left">
                       <Button component={Link} to="/bookings/1">
                         <ModeEditIcon />
