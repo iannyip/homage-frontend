@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import React, { useState } from "react";
+import axios from "axios";
 
 const getVaccineCenter = () => {
   return [
@@ -22,7 +23,20 @@ const getVaccineCenter = () => {
   ];
 };
 
+const BACKEND_URL =
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
+const postBooking = (fullName, nric, centreId, time) => {
+  axios
+    .post(BACKEND_URL + "/bookings/create", { fullName, nric, centreId, time })
+    .then((result) => {
+      console.log("posted!");
+      console.log(result);
+    })
+    .catch((error) => console.log(error));
+};
+
 export default function VaccineRegistration() {
+  console.log("i ran!");
   const centreList = [
     { name: "None", id: 0 },
     { name: "Bukit Batok CC", id: 1 },
@@ -59,6 +73,7 @@ export default function VaccineRegistration() {
   const handleSubmit = () => {
     console.log(`name: ${name}`);
     console.log(`nric: ${nric}`);
+    postBooking(name, nric, centre, date);
   };
   return (
     <React.Fragment>
