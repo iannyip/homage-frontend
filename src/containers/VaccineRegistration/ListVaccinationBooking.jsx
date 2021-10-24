@@ -16,48 +16,15 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
-const getBookingList = () => {
-  axios
-    .get(BACKEND_URL + "/bookings")
-    .then((result) => {
-      console.log("retrieved!!");
-      console.log(result.data);
-    })
-    .catch((error) => console.log(error));
-};
-
-function getBooking() {
-  return [
-    {
-      id: 1,
-      name: "Tan Ah Kow",
-      centerName: "Bukit Timah CC",
-      centerId: 3,
-      startTime: new Date("2021-12-01T09:00:00"),
-    },
-    {
-      id: 2,
-      name: "Jean Lee Ah Meow",
-      centerName: "Bukit Timah CC",
-      centerId: 3,
-      startTime: new Date("2021-12-01T10:00:00"),
-    },
-    {
-      id: 3,
-      name: "Lew Ah Boi",
-      centerName: "Bukit Timah CC",
-      centerId: 3,
-      startTime: new Date("2021-12-01T11:00:00"),
-    },
-  ];
-}
 
 export default function VaccineRegistrationListing() {
   const [allBookings, setAllBookings] = useState([]);
 
+  // Retrieve all data when view loads
   useEffect(() => {
     axios
       .get(BACKEND_URL + "/bookings")
