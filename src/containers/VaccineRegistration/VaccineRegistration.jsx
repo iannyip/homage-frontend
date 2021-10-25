@@ -39,7 +39,6 @@ const postBooking = (fullName, nric, centreId, time) => {
 };
 
 export default function VaccineRegistration() {
-  console.log("i ran!");
   const centreList = [
     { name: "None", id: 0 },
     { name: "Bukit Batok CC", id: 1 },
@@ -60,28 +59,36 @@ export default function VaccineRegistration() {
   // functions to add
   const handleNameChange = (event) => {
     const inputName = event.target.value;
-    console.log(`inputName: ${inputName}`);
     setName(inputName);
   };
   const handleNricChange = (event) => {
     const inputNric = event.target.value;
-    console.log(`inputNric: ${inputNric}`);
     setNric(inputNric);
   };
   const handleCentreChange = (event) => {
     const selectedCentre = event.target.value;
-    console.log(`selectedCentre: ${selectedCentre}`);
     setCentre(selectedCentre);
   };
   const handleDateChange = (newVal) => {
-    console.log(newVal);
     setDate(newVal);
   };
-  const handleSubmit = () => {
-    console.log(`name: ${name}`);
-    console.log(`nric: ${nric}`);
-    postBooking(name, nric, centre, date);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // postBooking(name, nric, centre, date);
+    axios
+      .post(BACKEND_URL + "/bookings/create", {
+        fullName: name,
+        nric,
+        centreId: centre,
+        time: date,
+      })
+      .then((result) => {
+        console.log("posted!");
+        console.log(result);
+      })
+      .catch((error) => console.log(error));
   };
+
   return (
     <React.Fragment>
       <CssBaseline />
