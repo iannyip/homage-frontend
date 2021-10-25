@@ -12,15 +12,15 @@ import {
 import DatePicker from "@mui/lab/DatePicker";
 import React, { useState } from "react";
 
-function getVaccineCenter() {
-  return [
-    { name: "None", id: 0 },
-    { name: "Bukit Batok CC", id: 1 },
-    { name: "Bukit Panjang CC", id: 2 },
-    { name: "Bukit Timah CC", id: 3 },
-    { name: "Outram Park Polyclinic", id: 4 },
-  ];
-}
+// function getVaccineCenter() {
+//   return [
+//     { name: "None", id: 0 },
+//     { name: "Bukit Batok CC", id: 1 },
+//     { name: "Bukit Panjang CC", id: 2 },
+//     { name: "Bukit Timah CC", id: 3 },
+//     { name: "Outram Park Polyclinic", id: 4 },
+//   ];
+// }
 
 function getBooking() {
   return {

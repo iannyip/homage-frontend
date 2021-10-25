@@ -12,19 +12,22 @@ import {
 import DatePicker from "@mui/lab/DatePicker";
 import React, { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 
-const getVaccineCenter = () => {
-  return [
-    { name: "None", id: 0 },
-    { name: "Bukit Batok CC", id: 1 },
-    { name: "Bukit Panjang CC", id: 2 },
-    { name: "Bukit Timah CC", id: 3 },
-    { name: "Outram Park Polyclinic", id: 4 },
-  ];
-};
+// const getVaccineCenter = () => {
+//   return [
+//     { name: "None", id: 0 },
+//     { name: "Bukit Batok CC", id: 1 },
+//     { name: "Bukit Panjang CC", id: 2 },
+//     { name: "Bukit Timah CC", id: 3 },
+//     { name: "Outram Park Polyclinic", id: 4 },
+//   ];
+// };
 
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
+
+// Helper function for posting to backend
 const postBooking = (fullName, nric, centreId, time) => {
   axios
     .post(BACKEND_URL + "/bookings/create", { fullName, nric, centreId, time })
@@ -44,11 +47,15 @@ export default function VaccineRegistration() {
     { name: "Bukit Timah CC", id: 3 },
     { name: "Outram Park Polyclinic", id: 4 },
   ];
-
+  // const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
   const [centre, setCentre] = useState(0);
   const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    // To code: get list of all Vaccine centres
+  }, []);
 
   // functions to add
   const handleNameChange = (event) => {
