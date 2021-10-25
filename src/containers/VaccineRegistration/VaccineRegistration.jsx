@@ -83,7 +83,8 @@ export default function VaccineRegistration() {
         fullName: name,
         nric,
         centreId: centre,
-        time: date,
+        date,
+        time: chosenSlot,
       })
       .then((result) => {
         console.log("posted!");
@@ -117,8 +118,8 @@ export default function VaccineRegistration() {
             autoComplete="nric"
             sx={{ mb: 2 }}
             autoFocus
-            value={name}
-            onChange={handleNameChange}
+            value={nric}
+            onChange={handleNricChange}
           />
           {/* FULL NAME FIELD */}
           <TextField
@@ -129,8 +130,8 @@ export default function VaccineRegistration() {
             name="name"
             autoComplete="name"
             sx={{ mb: 2 }}
-            value={nric}
-            onChange={handleNricChange}
+            value={name}
+            onChange={handleNameChange}
           />
           {/* VACCINE CENTER DROPDOWN */}
           <InputLabel id="vaccineCenterLabel">Vaccine Center</InputLabel>
