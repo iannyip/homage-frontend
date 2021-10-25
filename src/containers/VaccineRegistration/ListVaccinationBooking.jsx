@@ -23,18 +23,35 @@ const BACKEND_URL =
 
 export default function VaccineRegistrationListing() {
   const [allBookings, setAllBookings] = useState([]);
+  const [reRender, setReRender] = useState(false);
 
   // Retrieve all data when view loads
   useEffect(() => {
     axios
       .get(BACKEND_URL + "/bookings")
       .then((result) => {
-        console.log("retrieved!!");
-        console.log(result.data);
+        console.log("got all bookings!");
         setAllBookings(result.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [reRender]);
+
+  const handleDelete = (bookingId) => {
+    console.log(`going to delete ${bookingId}`);
+    axios
+      .delete(BACKEND_URL + "/bookings/" + bookingId + "/delete", {
+        id: bookingId,
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          setReRender(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <React.Fragment>
@@ -75,7 +92,12 @@ export default function VaccineRegistrationListing() {
                       <Button component={Link} to="/bookings/1">
                         <ModeEditIcon />
                       </Button>
-                      <Button>
+                      <Button
+                        value="hello"
+                        onClick={() => {
+                          handleDelete(row.id);
+                        }}
+                      >
                         <DeleteIcon />
                       </Button>
                     </TableCell>

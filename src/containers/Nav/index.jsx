@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import React from "react";
 import Tabs from "@mui/material/Tabs";
 import LinkTab from "@mui/material/Tab";
