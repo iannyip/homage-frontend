@@ -28,29 +28,32 @@ const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
 export default function VaccineRegistration() {
-  const centreList = [
-    { name: "None", id: 0 },
-    { name: "Bukit Batok CC", id: 1 },
-    { name: "Bukit Panjang CC", id: 2 },
-    { name: "Bukit Timah CC", id: 3 },
-    { name: "Outram Park Polyclinic", id: 4 },
-  ];
   const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
   const [centre, setCentre] = useState(0);
   const [date, setDate] = useState(new Date());
+  const [timeslotsArr, setTimeslotsArr] = useState([]);
+  const [chosenSlot, setchosenSlot] = useState("");
 
   useEffect(() => {
-    // To code: get list of all Vaccine centres
     axios
       .get(BACKEND_URL + "/centres")
       .then((result) => {
-        console.log(result.data);
         setAllCentres(result.data);
       })
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    // also get the list of timeslots for that date
+    axios
+      .get(BACKEND_URL + `/centres/${centre}/12345`)
+      .then((result) => {
+        setTimeslotsArr(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, [date, centre]);
 
   // functions to add
   const handleNameChange = (event) => {
@@ -67,6 +70,10 @@ export default function VaccineRegistration() {
   };
   const handleDateChange = (newVal) => {
     setDate(newVal);
+  };
+  const handleSlotChange = (event) => {
+    const selectedSlot = event.target.value;
+    setchosenSlot(selectedSlot);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -146,7 +153,7 @@ export default function VaccineRegistration() {
               );
             })}
           </Select>
-          {/* DATE TIME SELECTION */}
+          {/* DATE SELECTION */}
           <DatePicker
             renderInput={(params) => (
               <TextField {...params} helperText={null} />
@@ -156,6 +163,27 @@ export default function VaccineRegistration() {
             onChange={handleDateChange}
             required
           />
+          {/* SLOT SELECTION */}
+          <InputLabel id="timeslotLabel">Time Slot</InputLabel>
+          <Select
+            labelId="timeslotLabel"
+            label="Timeslot"
+            required
+            fullWidth
+            id="timeslot"
+            value={chosenSlot}
+            defaultValue=""
+            onChange={handleSlotChange}
+            sx={{ mb: 2 }}
+          >
+            {timeslotsArr.map((v) => {
+              return (
+                <MenuItem key={v.time} value={v.time}>
+                  {v.time}
+                </MenuItem>
+              );
+            })}
+          </Select>
           {/* SUBMIT BUTTON */}
           <Button
             type="submit"
