@@ -27,7 +27,7 @@ import { useEffect } from "react";
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
-export default function VaccineRegistration() {
+export default function VaccineRegistration({ submitModalHandler }) {
   const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
@@ -90,6 +90,7 @@ export default function VaccineRegistration() {
       })
       .then((result) => {
         console.log("posted!");
+        submitModalHandler();
         setName("");
         setNric("");
         setCentre(0);
