@@ -20,7 +20,6 @@ export default function App() {
                 <VaccineRegistration/>
               </Route>
               <Route path="/bookings/:bookingId">
-                <h1>Hello</h1>
                 <EditVaccineRegistration/>
               </Route>
               <Route path="/bookings">
