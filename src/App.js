@@ -30,9 +30,9 @@ export default function App() {
             <Route path="/bookings">
               <VaccineRegistrationListing/>
             </Route>
-            <Route path="/mybookings">
+            {/* <Route path="/mybookings">
               <VaccineRegistrationListing/>
-            </Route>
+            </Route> */}
             <Route path="/">
               <Redirect to="/new" />
             </Route>
