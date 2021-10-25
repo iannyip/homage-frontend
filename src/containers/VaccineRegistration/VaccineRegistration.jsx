@@ -58,6 +58,8 @@ export default function VaccineRegistration() {
           setTimeslotsArr(result.data);
         })
         .catch((error) => console.log(error));
+    } else {
+      console.log("should not get slots; missing centre");
     }
   }, [date, centre]);
 

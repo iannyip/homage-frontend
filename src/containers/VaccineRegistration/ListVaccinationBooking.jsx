@@ -83,7 +83,7 @@ export default function VaccineRegistrationListing() {
                     </TableCell>
                     <TableCell align="left">{row.centre.name}</TableCell>
                     <TableCell align="left">
-                      {moment(row.date).format("d MMM YYYY")}
+                      {moment(row.date).format("D MMM YYYY")}
                     </TableCell>
                     <TableCell align="left">
                       {row.time.substring(0, 5)}
@@ -93,7 +93,6 @@ export default function VaccineRegistrationListing() {
                         <ModeEditIcon />
                       </Button>
                       <Button
-                        value="hello"
                         onClick={() => {
                           handleDelete(row.id);
                         }}

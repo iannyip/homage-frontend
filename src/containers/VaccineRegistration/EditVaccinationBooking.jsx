@@ -23,10 +23,12 @@ export default function EditVaccineRegistration() {
   const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
-  const [centre, setCentre] = useState(0);
+  const [centre, setCentre] = useState("");
   const [date, setDate] = useState(new Date());
   const [timeslotsArr, setTimeslotsArr] = useState([]);
   const [chosenSlot, setchosenSlot] = useState("");
+  const [tempSlot, setTempSlot] = useState("");
+  const [personId, setPersonId] = useState("");
 
   // Get list of centres when component initializes
   useEffect(() => {
@@ -37,17 +39,31 @@ export default function EditVaccineRegistration() {
       })
       .catch((error) => console.log(error));
   }, []);
+  // Get list of timeslots for centre
+  useEffect(() => {
+    if (centre > 0) {
+      axios
+        .get(BACKEND_URL + `/centres/${centre}/12345`)
+        .then((result) => {
+          setTimeslotsArr(result.data);
+          setchosenSlot(tempSlot);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [tempSlot]);
 
   // Get list of timeslots each time centre or date field is changed
   useEffect(() => {
     // also get the list of timeslots for that date
     console.log("getting slots!");
-    axios
-      .get(BACKEND_URL + `/centres/${centre}/12345`)
-      .then((result) => {
-        setTimeslotsArr(result.data);
-      })
-      .catch((error) => console.log(error));
+    if (centre > 0) {
+      axios
+        .get(BACKEND_URL + `/centres/${centre}/12345`)
+        .then((result) => {
+          setTimeslotsArr(result.data);
+        })
+        .catch((error) => console.log(error));
+    }
   }, [date, centre]);
 
   // Get the existing booking
@@ -58,9 +74,10 @@ export default function EditVaccineRegistration() {
         const bookingData = result.data;
         setNric(bookingData.person.nric);
         setName(bookingData.person.fullName);
+        setPersonId(bookingData.person.id);
         setCentre(bookingData.centreId);
         setDate(bookingData.date);
-        setchosenSlot(bookingData.time.substr(0, 5));
+        setTempSlot(bookingData.time.substr(0, 5));
       })
       .catch((error) => {
         console.log(error);
@@ -83,9 +100,25 @@ export default function EditVaccineRegistration() {
   const handleSlotChange = (event) => {
     setchosenSlot(event.target.value);
   };
-  const handleSubmit = () => {
+  const handleUpdate = () => {
     console.log(`name: ${name}`);
     console.log(`nric: ${nric}`);
+    axios
+      .put(`${BACKEND_URL}/bookings/${bookingId}/edit`, {
+        name,
+        nric,
+        personId,
+        centre,
+        date,
+        chosenSlot,
+        bookingId,
+      })
+      .then((result) => {
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <React.Fragment>
@@ -185,7 +218,7 @@ export default function EditVaccineRegistration() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={handleSubmit}
+            onClick={handleUpdate}
           >
             Update!
           </Button>
