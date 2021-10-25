@@ -49,7 +49,6 @@ export default function VaccineRegistration() {
   // Get list of timeslots each time centre or date field is changed
   useEffect(() => {
     // also get the list of timeslots for that date
-    console.log("getting slots!");
     if (centre > 0) {
       axios
         .get(BACKEND_URL + `/centres/${centre}/12345`)
@@ -58,8 +57,6 @@ export default function VaccineRegistration() {
           setTimeslotsArr(result.data);
         })
         .catch((error) => console.log(error));
-    } else {
-      console.log("should not get slots; missing centre");
     }
   }, [date, centre]);
 

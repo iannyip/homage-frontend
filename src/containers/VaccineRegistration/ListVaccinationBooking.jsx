@@ -30,7 +30,6 @@ export default function VaccineRegistrationListing() {
     axios
       .get(BACKEND_URL + "/bookings")
       .then((result) => {
-        console.log("got all bookings!");
         setAllBookings(result.data);
       })
       .catch((error) => console.log(error));
