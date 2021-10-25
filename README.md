@@ -9,7 +9,8 @@ A simple reservation app created with Node.js, Express, React, and postgresql.
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Features](#Features)
-- [Features](#Assumptions)
+- [Assumptions](#Assumptions)
+- [App design](#App design)
 
 ## General info
 
