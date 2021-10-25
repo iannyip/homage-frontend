@@ -31,7 +31,7 @@ export default function VaccineRegistration() {
   const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
-  const [centre, setCentre] = useState(0);
+  const [centre, setCentre] = useState("");
   const [date, setDate] = useState(new Date());
   const [timeslotsArr, setTimeslotsArr] = useState([]);
   const [chosenSlot, setchosenSlot] = useState("");
@@ -50,12 +50,15 @@ export default function VaccineRegistration() {
   useEffect(() => {
     // also get the list of timeslots for that date
     console.log("getting slots!");
-    axios
-      .get(BACKEND_URL + `/centres/${centre}/12345`)
-      .then((result) => {
-        setTimeslotsArr(result.data);
-      })
-      .catch((error) => console.log(error));
+    if (centre > 0) {
+      axios
+        .get(BACKEND_URL + `/centres/${centre}/12345`)
+        .then((result) => {
+          console.log(result);
+          setTimeslotsArr(result.data);
+        })
+        .catch((error) => console.log(error));
+    }
   }, [date, centre]);
 
   // field changing handlers
