@@ -10,7 +10,7 @@ A simple reservation app created with Node.js, Express, React, and postgresql.
 - [Technologies](#technologies)
 - [Features](#Features)
 - [Assumptions](#Assumptions)
-- [App design](#App design)
+- [Design](#Design)
 
 ## General info
 
@@ -46,7 +46,7 @@ A boilerplate template was used from [here](https://github.com/homageapp/vaccina
 2. Centre capacity will be defined by its `start_time`, `end_time`, and `slot_capacity`
 3. Each `slot` is 15 min long. There are no lunch breaks; `slot_capacity` is constant throughout the day.
 
-## App design
+## Design
 
 - Backend is designed to be RESTful
 - Backend set up follows MVC model
