@@ -4,15 +4,10 @@ import VaccineRegistration from './containers/VaccineRegistration/VaccineRegistr
 import VaccineRegistrationListing from './containers/VaccineRegistration/ListVaccinationBooking.jsx';
 import EditVaccineRegistration from './containers/VaccineRegistration/EditVaccinationBooking.jsx';
 import { NavBar } from './containers/Nav/index.jsx';
-import { Component } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-export default function App() {
-  // componentDidMount() {
-  //   document.title = 'Vaccination Center';
-  // }
-  
+export default function App() {  
     return (
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <BrowserRouter>
