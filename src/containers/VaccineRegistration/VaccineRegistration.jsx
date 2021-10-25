@@ -186,7 +186,7 @@ export default function VaccineRegistration() {
             {timeslotsArr.map((v) => {
               return (
                 <MenuItem key={v.time} value={v.time}>
-                  {v.time}
+                  {v.time} ({v.capacity} slots)
                 </MenuItem>
               );
             })}
