@@ -51,7 +51,7 @@ export default function VaccineRegistration() {
     // also get the list of timeslots for that date
     if (centre > 0) {
       axios
-        .get(BACKEND_URL + `/centres/${centre}/12345`)
+        .get(BACKEND_URL + `/centres/${centre}/${date}`)
         .then((result) => {
           console.log(result);
           setTimeslotsArr(result.data);
