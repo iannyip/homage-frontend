@@ -13,15 +13,17 @@ export default function App() {
         <BrowserRouter>
             <NavBar />
             <Switch>
+              <Route path="/new">
+                <VaccineRegistration/>
+              </Route>
+              <Route path="/bookings/:bookingId">
+                <h1>Hello</h1>
+                <EditVaccineRegistration/>
+              </Route>
               <Route path="/bookings">
                 <VaccineRegistrationListing/>
               </Route>
-              <Route path="/bookings/:bookingId">
-                <EditVaccineRegistration/>
-              </Route>
-              <Route path="/">
-                <VaccineRegistration/>
-              </Route>
+              
             </Switch>
         </BrowserRouter>
       </LocalizationProvider>
