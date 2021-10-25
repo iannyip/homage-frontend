@@ -36,6 +36,7 @@ export default function VaccineRegistration() {
   const [timeslotsArr, setTimeslotsArr] = useState([]);
   const [chosenSlot, setchosenSlot] = useState("");
 
+  // Get list of centres when component initializes
   useEffect(() => {
     axios
       .get(BACKEND_URL + "/centres")
@@ -45,8 +46,10 @@ export default function VaccineRegistration() {
       .catch((error) => console.log(error));
   }, []);
 
+  // Get list of timeslots each time centre or date field is changed
   useEffect(() => {
     // also get the list of timeslots for that date
+    console.log("getting slots!");
     axios
       .get(BACKEND_URL + `/centres/${centre}/12345`)
       .then((result) => {
@@ -55,29 +58,26 @@ export default function VaccineRegistration() {
       .catch((error) => console.log(error));
   }, [date, centre]);
 
-  // functions to add
+  // field changing handlers
   const handleNameChange = (event) => {
-    const inputName = event.target.value;
-    setName(inputName);
+    setName(event.target.value);
   };
   const handleNricChange = (event) => {
-    const inputNric = event.target.value;
-    setNric(inputNric);
+    setNric(event.target.value);
   };
   const handleCentreChange = (event) => {
-    const selectedCentre = event.target.value;
-    setCentre(selectedCentre);
+    setCentre(event.target.value);
   };
   const handleDateChange = (newVal) => {
     setDate(newVal);
   };
   const handleSlotChange = (event) => {
-    const selectedSlot = event.target.value;
-    setchosenSlot(selectedSlot);
+    setchosenSlot(event.target.value);
   };
+
+  // Post request to backend on submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    // postBooking(name, nric, centre, date);
     axios
       .post(BACKEND_URL + "/bookings/create", {
         fullName: name,
@@ -88,7 +88,11 @@ export default function VaccineRegistration() {
       })
       .then((result) => {
         console.log("posted!");
-        console.log(result);
+        setName("");
+        setNric("");
+        setCentre(0);
+        setDate(new Date());
+        setchosenSlot("");
       })
       .catch((error) => console.log(error));
   };
