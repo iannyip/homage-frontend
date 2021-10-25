@@ -16,7 +16,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import moment from "moment";
+import moment from "moment";
 
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
@@ -50,7 +50,8 @@ export default function VaccineRegistrationListing() {
                 <TableRow>
                   <TableCell>Name</TableCell>
                   <TableCell align="left">Center Name</TableCell>
-                  <TableCell align="left">Start Time</TableCell>
+                  <TableCell align="left">Date</TableCell>
+                  <TableCell align="left">Time</TableCell>
                   <TableCell align="left">&nbsp;</TableCell>
                 </TableRow>
               </TableHead>
@@ -64,7 +65,12 @@ export default function VaccineRegistrationListing() {
                       {row.person.fullName}
                     </TableCell>
                     <TableCell align="left">{row.centre.name}</TableCell>
-                    <TableCell align="left">{row.time.toString()}</TableCell>
+                    <TableCell align="left">
+                      {moment(row.date).format("d MMM YYYY")}
+                    </TableCell>
+                    <TableCell align="left">
+                      {row.time.substring(0, 5)}
+                    </TableCell>
                     <TableCell align="left">
                       <Button component={Link} to="/bookings/1">
                         <ModeEditIcon />
