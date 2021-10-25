@@ -14,16 +14,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 
-// const getVaccineCenter = () => {
-//   return [
-//     { name: "None", id: 0 },
-//     { name: "Bukit Batok CC", id: 1 },
-//     { name: "Bukit Panjang CC", id: 2 },
-//     { name: "Bukit Timah CC", id: 3 },
-//     { name: "Outram Park Polyclinic", id: 4 },
-//   ];
-// };
-
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
