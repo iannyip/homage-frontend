@@ -27,17 +27,6 @@ import { useEffect } from "react";
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
-// Helper function for posting to backend
-const postBooking = (fullName, nric, centreId, time) => {
-  axios
-    .post(BACKEND_URL + "/bookings/create", { fullName, nric, centreId, time })
-    .then((result) => {
-      console.log("posted!");
-      console.log(result);
-    })
-    .catch((error) => console.log(error));
-};
-
 export default function VaccineRegistration() {
   const centreList = [
     { name: "None", id: 0 },
@@ -46,7 +35,7 @@ export default function VaccineRegistration() {
     { name: "Bukit Timah CC", id: 3 },
     { name: "Outram Park Polyclinic", id: 4 },
   ];
-  // const [allCentres, setAllCentres] = useState([]);
+  const [allCentres, setAllCentres] = useState([]);
   const [name, setName] = useState("");
   const [nric, setNric] = useState("");
   const [centre, setCentre] = useState(0);
@@ -54,6 +43,13 @@ export default function VaccineRegistration() {
 
   useEffect(() => {
     // To code: get list of all Vaccine centres
+    axios
+      .get(BACKEND_URL + "/centres")
+      .then((result) => {
+        console.log(result.data);
+        setAllCentres(result.data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   // functions to add
@@ -142,7 +138,7 @@ export default function VaccineRegistration() {
             onChange={handleCentreChange}
             sx={{ mb: 2 }}
           >
-            {centreList.map((v) => {
+            {allCentres.map((v) => {
               return (
                 <MenuItem key={v.id} value={v.id}>
                   {v.name}
