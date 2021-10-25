@@ -18,40 +18,13 @@ import axios from "axios";
 const BACKEND_URL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
-// function getVaccineCenter() {
-//   return [
-//     { name: "None", id: 0 },
-//     { name: "Bukit Batok CC", id: 1 },
-//     { name: "Bukit Panjang CC", id: 2 },
-//     { name: "Bukit Timah CC", id: 3 },
-//     { name: "Outram Park Polyclinic", id: 4 },
-//   ];
-// }
-
-function getBooking() {
-  return {
-    id: 1,
-    name: "Tan Ah Kow",
-    centerName: "Bukit Timah CC",
-    centerId: 3,
-    startTime: new Date("2021-12-01T09:00:00"),
-  };
-}
-
 export default function EditVaccineRegistration() {
-  const { bookingId } = useParams(); // to fix
-  const centreList = [
-    { name: "None", id: 0 },
-    { name: "Bukit Batok CC", id: 1 },
-    { name: "Bukit Panjang CC", id: 2 },
-    { name: "Bukit Timah CC", id: 3 },
-    { name: "Outram Park Polyclinic", id: 4 },
-  ];
+  const { bookingId } = useParams();
   const [allCentres, setAllCentres] = useState([]);
-  const [name, setName] = useState(getBooking().name);
-  const [nric, setNric] = useState(getBooking().name);
-  const [centre, setCentre] = useState(getBooking().centerId);
-  const [date, setDate] = useState(getBooking().startTime);
+  const [name, setName] = useState("");
+  const [nric, setNric] = useState("");
+  const [centre, setCentre] = useState(0);
+  const [date, setDate] = useState(new Date());
   const [timeslotsArr, setTimeslotsArr] = useState([]);
   const [chosenSlot, setchosenSlot] = useState("");
 
@@ -126,7 +99,7 @@ export default function EditVaccineRegistration() {
         >
           {/* TITLE */}
           <Typography component="h1" variant="h5">
-            Book a slot
+            Update Booking
           </Typography>
           {/* NRIC FIELD */}
           <TextField
