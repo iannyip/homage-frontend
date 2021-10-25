@@ -89,7 +89,7 @@ export default function VaccineRegistrationListing() {
                       {row.time.substring(0, 5)}
                     </TableCell>
                     <TableCell align="left">
-                      <Button component={Link} exact to={`/bookings/${row.id}`}>
+                      <Button component={Link} to={`/bookings/${row.id}`}>
                         <ModeEditIcon />
                       </Button>
                       <Button

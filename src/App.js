@@ -13,9 +13,6 @@ export default function App() {
         <BrowserRouter>
             <NavBar />
             <Switch>
-              <Route exact path="/">
-                <Redirect to="/new" />
-              </Route>
               <Route path="/new">
                 <VaccineRegistration/>
               </Route>
@@ -25,7 +22,9 @@ export default function App() {
               <Route path="/bookings">
                 <VaccineRegistrationListing/>
               </Route>
-              
+              <Route path="/">
+                <Redirect to="/new" />
+              </Route>
             </Switch>
         </BrowserRouter>
       </LocalizationProvider>

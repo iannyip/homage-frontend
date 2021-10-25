@@ -10,8 +10,8 @@ export const NavBar = () => {
   };
   return (
     <Tabs value={value} onChange={handleChange} centered>
-      <LinkTab component={Link} exact to="/new" label="Make a Booking" />
-      <LinkTab component={Link} exact to="/bookings" label="All Booking" />
+      <LinkTab component={Link} to="/new" label="Make a Booking" />
+      <LinkTab component={Link} to="/bookings" label="All Booking" />
     </Tabs>
   );
 };

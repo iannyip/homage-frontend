@@ -65,7 +65,7 @@ export default function EditVaccineRegistration() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [bookingId]);
 
   // change handlers
   const handleNameChange = (event) => {
