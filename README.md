@@ -16,6 +16,11 @@ A simple reservation app created with Node.js, Express, React, and postgresql.
 
 This project was a 2-day sprint.
 
+- [Frontend github repo](https://github.com/iannyip/homage-frontend)
+- [Backend github repo](https://github.com/iannyip/homage-backend)
+- [Deployed frontend](https://getvaxxed.netlify.app/)
+- [Deployed backend](https://peaceful-springs-00288.herokuapp.com/)
+
 ## Technologies
 
 #### Frontend
