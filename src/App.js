@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Switch,BrowserRouter } from 'react-router-dom';
+import {Route, Switch,BrowserRouter, Redirect } from 'react-router-dom';
 import VaccineRegistration from './containers/VaccineRegistration/VaccineRegistration.jsx';
 import VaccineRegistrationListing from './containers/VaccineRegistration/ListVaccinationBooking.jsx';
 import EditVaccineRegistration from './containers/VaccineRegistration/EditVaccinationBooking.jsx';
@@ -13,6 +13,9 @@ export default function App() {
         <BrowserRouter>
             <NavBar />
             <Switch>
+              <Route exact path="/">
+                <Redirect to="/new" />
+              </Route>
               <Route path="/new">
                 <VaccineRegistration/>
               </Route>
