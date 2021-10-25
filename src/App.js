@@ -8,25 +8,28 @@ import { Component } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-class App extends Component {
-  componentDidMount() {
-    document.title = 'Vaccination Center';
-  }
-  render() {
+export default function App() {
+  // componentDidMount() {
+  //   document.title = 'Vaccination Center';
+  // }
+  
     return (
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <BrowserRouter>
             <NavBar />
             <Switch>
-              <Route path="/bookings" exact component={VaccineRegistrationListing} />
-              <Route path="/bookings/:bookingId" exact component={EditVaccineRegistration} />
-              <Route path="/" exact component={VaccineRegistration} />
+              <Route path="/bookings">
+                <VaccineRegistrationListing/>
+              </Route>
+              <Route path="/bookings/:bookingId">
+                <EditVaccineRegistration/>
+              </Route>
+              <Route path="/">
+                <VaccineRegistration/>
+              </Route>
             </Switch>
         </BrowserRouter>
       </LocalizationProvider>
     )
-  }
 }
 
-
-export default App;
